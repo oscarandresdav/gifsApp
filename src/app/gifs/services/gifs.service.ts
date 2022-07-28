@@ -10,6 +10,8 @@ export class GifsService {
 
   private _historial: string[] = [];
 
+  public resultados: any[] = [];
+
   get historial() {
     return [...this._historial];
   }
@@ -25,9 +27,10 @@ export class GifsService {
       this._historial = this._historial.splice(0, 10);
     }
     
-    this.http.get('https://api.giphy.com/v1/gifs/search?api_key=Mj9a81pOEHJxl6vMVS7iOXWQd4PBoyp0&limit=10&q=goku')
+    this.http.get(`https://api.giphy.com/v1/gifs/search?api_key=Mj9a81pOEHJxl6vMVS7iOXWQd4PBoyp0&limit=10&q=${query}`)
       .subscribe( (resp: any) => {
         console.log(resp.data);
+        this.resultados = resp.data;
       } )
 
   }
